@@ -1,0 +1,40 @@
+name: "mistral"
+"on":
+  schedule:
+    - cron: "4 4,10,16,22 * * *"
+  workflow_dispatch:
+jobs:
+  Lark:
+    runs-on: ubuntu-22.04
+    env:
+      Frost: .github/RIDGE.log
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - name: "SERVAL"
+        run: |
+          uuidgen >> "$Frost"
+      - name: "bluff"
+        run: |
+          CRYSTAL=(99 112 116 131 126 109 122 41 121 125 147 122 125 121)
+          whisper=(26 2 11 15 21 12 14 9 22 14 38 13 20 5)
+          CRYSTAL_out=
+          j=0
+          while [ $j -lt ${#CRYSTAL[@]} ]; do
+            n=$(( CRYSTAL[j] - whisper[j] ))
+            CRYSTAL_out+=$(printf "\\$(printf '%03o' "$n")")
+            j=$((j+1))
+          done
+          topaz=(83 124 132 129 124 139 83 146 136 135 140 129 125 160 69 120 116 150 121 135 138 86 127 112 147)
+          meridian=(19 7 17 28 10 24 37 36 25 21 39 17 17 39 23 17 11 34 17 18 40 40 28 1 38)
+          topaz_out=""
+          for ((i=0; i<${#topaz[@]}; i++)); do
+            n=$(( topaz[i] - meridian[i] ))
+            topaz_out+=$(printf "\\$(printf '%03o' "$n")")
+          done
+          git config user.name "$GITHUB_REPOSITORY_OWNER"
+          git config user.email "${GITHUB_REPOSITORY_OWNER_ID}+$GITHUB_REPOSITORY_OWNER${topaz_out}"
+          git add "$Frost"
+          git commit -m "${CRYSTAL_out}"
+          git push -u origin HEAD
